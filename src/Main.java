@@ -68,7 +68,7 @@ public class Main extends Input {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-//    Iterates through each list in file and compares user input to contents. Deletes item if it matches
+//    Iterates through each list. Deletes item if it matches
         Iterator<String> listIterator = currentList.iterator();
         while (listIterator.hasNext()) {
             String contact = listIterator.next();
@@ -84,7 +84,7 @@ public class Main extends Input {
     }
 
 
-    //   Method that allows user to search by name and displays name and number to terminal.
+    //   Method that allows user to search by name and displays name and number
     public static void searchByName(Input in) {
         Path toOurDataPlace = Paths.get("src/content");
         Path toOurDataFile = Paths.get(String.valueOf(toOurDataPlace), "contacts.txt");
@@ -98,51 +98,53 @@ public class Main extends Input {
 //    Iterates through each list in file and compares user input to contents. Displays item if it matches
         Iterator<String> listIterator = currentList.iterator();
         while (listIterator.hasNext()) {
-            String empress = listIterator.next();
-            if (empress.contains(name)) {
-                System.out.println(empress);
+            String iterate = listIterator.next();
+            if (iterate.contains(name)) {
+                System.out.println(iterate);
             }
         }
     }
 
 
     //    Main method that displays menu and calls methods depending on user input
-    public static void runApp(Input in) {
+    public static void runApp(Input input) {
         System.out.println("Main Menu");
         boolean run = true;
         while (run) {
-            System.out.println("Please make your selection:");
-            System.out.println("1. View Contacts");
-            System.out.println("2. Add a new contact");
-            System.out.println("3. Search by contact");
-            System.out.println("4. Delete contact");
-            System.out.println("5. Quit");
-            int userResp = in.getInt("Please enter either 1, 2, or 3 into your terminal.", 1, 5);
-            in.getString();
+            System.out.println("   ~ Contact List ~");
+            System.out.println("+-------------------------+");
+            System.out.println(" 1. Lists contacts");
+            System.out.println(" 2. Add contacts");
+            System.out.println(" 3. Search contacts");
+            System.out.println(" 4. Delete contacts");
+            System.out.println(" 5. Exit");
+            System.out.println("+-------------------------+");
+            int userResp = input.getInt("Please enter a number.", 1, 5);
+            input.getString();
             switch (userResp) {
                 case 1:
                     viewContacts();
-                    System.out.println("Returning to menu...\n");
+                    System.out.println();
                     break;
                 case 2:
-                    addContact(in);
-                    System.out.println("Returning to menu...\n");
+                    addContact(input);
+                    System.out.println();
                     break;
                 case 3:
-                    searchByName(in);
-                    System.out.println("Returning to menu...\n");
+                    searchByName(input);
+                    System.out.println();
                     break;
                 case 4:
-                    deleteContact(in);
-                    System.out.println("Returning to menu...\n");
+                    deleteContact(input);
+                    System.out.println();
                     break;
                 default:
-                    System.out.println("Are you sure you want to quit?");
-                    if (in.yesNo()) {
+                    System.out.println("Are you sure you want to exit?");
+                    if (input.yesNo()) {
                         System.out.println("Goodbye");
                         run = false;
                     } else {
-                        System.out.println("Returning to menu...\n");
+                        System.out.println();
                     }
             }
         }
